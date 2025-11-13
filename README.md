@@ -1,15 +1,25 @@
 # Google Ads PPC Analysis Tool
 
-A comprehensive competitive analysis tool for Google Ads PPC campaigns with AI-powered insights.
+A comprehensive competitive analysis tool for Google Ads PPC campaigns with AI-powered insights and **LIVE data collection via SerpAPI**.
+
+## ✨ Now with LIVE Data Collection!
+
+This tool is **fully integrated with SerpAPI** to automatically collect real Google Ads data:
+- ✅ **Automated hourly checks** for your keywords
+- ✅ **Real Google Ads** including headlines, descriptions, extensions
+- ✅ **Shopping ads** support
+- ✅ **Multiple locations & devices**
+- ✅ **Already configured** - just add your keywords!
 
 ## Features
 
-- 🔍 **Ad Data Collection** - Capture comprehensive ad data from multiple sources
+- 🔍 **Live Ad Collection** - Real Google Ads data via SerpAPI integration
 - 📊 **Historical Tracking** - Never lose data, track changes over time
-- ⏰ **Automated Monitoring** - Scheduled checks for keywords
-- 🤖 **AI Analysis** - Pattern detection and actionable insights
-- 💬 **Interactive Chat** - Ask questions about your data
+- ⏰ **Automated Monitoring** - Hourly scheduled checks for keywords
+- 🤖 **AI Analysis** - Pattern detection and actionable insights powered by Claude
+- 💬 **Interactive Chat** - Ask questions about your data with AI assistant
 - 📈 **Visualization** - Charts and trends
+- 🎯 **Competitor Tracking** - Monitor competitor ad strategies
 
 ## Architecture
 
@@ -28,15 +38,38 @@ A comprehensive competitive analysis tool for Google Ads PPC campaigns with AI-p
 
 ### Installation
 
-1. Clone the repository
-2. Copy `.env.example` to `.env` and configure
-3. Run with Docker Compose:
+1. **Clone the repository**
 
-```bash
-docker-compose up -d
-```
+2. **Configure your API keys**
 
-4. Access the application at `http://localhost:3000`
+   The `.env` file is already configured with your SerpAPI key!
+   ```bash
+   # .env file (already set up)
+   SERPAPI_KEY=28f9888fa54352b9166b35d38dc7cc56d15106ca9b02d9439452d92c597ba6c4
+   ANTHROPIC_API_KEY=your_anthropic_key_here  # Add your Claude API key
+   ```
+
+3. **Test your SerpAPI connection** (optional but recommended)
+   ```bash
+   cd backend
+   python scripts/test_serpapi.py
+   ```
+
+4. **Start the application**
+   ```bash
+   docker-compose up -d
+   ```
+
+5. **Access the web interface**
+   ```
+   http://localhost:3000
+   ```
+
+6. **Add keywords to monitor**
+   - Go to Keywords page
+   - Click "Add Keyword"
+   - Enter keyword, location, device
+   - Ads will be collected automatically every hour!
 
 ### Manual Setup (Development)
 
@@ -57,6 +90,47 @@ cd frontend
 npm install
 npm run dev
 ```
+
+## SerpAPI Integration
+
+This tool uses **SerpAPI** to collect real Google Ads data. Your API key is already configured!
+
+### What Gets Collected
+
+Every hour, for each keyword you add:
+- Ad headlines (all variations)
+- Ad descriptions
+- Display URLs and landing pages
+- Ad extensions (sitelinks, callouts, etc.)
+- Advertiser information
+- Ad position and placement
+- Shopping ads
+- Complete raw data for analysis
+
+### Usage Guide
+
+**See [SERPAPI_SETUP.md](SERPAPI_SETUP.md) for complete documentation**, including:
+- How to test your connection
+- Location and device options
+- SerpAPI pricing and limits
+- Troubleshooting tips
+- Advanced configuration
+
+### Quick Example
+
+```python
+# Keywords added in the UI are automatically monitored
+# Example: "running shoes" in "United States" on "desktop"
+# System checks hourly and saves all ads to database
+```
+
+### Cost Management
+
+- **Free Tier**: 100 searches/month (~3-5 keywords checked hourly)
+- **Starter ($50/mo)**: 5,000 searches (~175 keywords)
+- **Pro ($150/mo)**: 30,000 searches (~1,000 keywords)
+
+Tips: Use longer intervals (3-6 hours) to monitor more keywords with fewer searches.
 
 ## Project Structure
 
@@ -97,6 +171,9 @@ REDIS_URL=redis://localhost:6379/0
 
 # Claude API
 ANTHROPIC_API_KEY=your_api_key_here
+
+# SerpAPI (already configured!)
+SERPAPI_KEY=your_serpapi_key
 
 # App Settings
 SECRET_KEY=your_secret_key_here

@@ -30,6 +30,9 @@ class Settings(BaseSettings):
     ANTHROPIC_API_KEY: str = ""
     CLAUDE_MODEL: str = "claude-3-5-sonnet-20241022"
 
+    # SerpAPI
+    SERPAPI_KEY: str = ""
+
     # Monitoring
     DEFAULT_CHECK_INTERVAL_HOURS: int = 1
 
